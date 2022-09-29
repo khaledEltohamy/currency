@@ -17,7 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Create a currency converter app with the following features:
 
-# List of supported currencies with their country’s flag , Store the data locally in a database.
+## List of supported currencies with their country’s flag , Store the data locally in a database.
 
  It contains a set of cards consisting of the names of the countries and their corresponding currency names and taught them using three API requests.
  
@@ -30,16 +30,16 @@ samples, guidance on mobile development, and a full API reference.
   - use future.wait().
   - use rxDart (ZipStream()).
  
- # Note: can unCommit for three TODO in remoteDataSource.dart file and try it.
+## Note: can unCommit for three TODO in remoteDataSource.dart file and try it.
  
  after the first API request & load the data from it for future usage:
  can try it when lost connection from internet.
 
-# Historical data for 2 currencies of your choosing for the last 7 days.
+## Historical data for 2 currencies of your choosing for the last 7 days.
 
-# Currency converter where the user can select 2 currencies with the amount to convert.
+## Currency converter where the user can select 2 currencies with the amount to convert.
 
-# Adapted image loader library with justification on why to choose it.
+## Adapted image loader library with justification on why to choose it.
 
 The goodness of caching network images in a Flutter application does more than just boot up the performance of the application itself.
 
@@ -56,8 +56,8 @@ For help getting started with cached_network_image, view the
 - [online documentation](https://pub.dev/packages/cached_network_image)
 
 
-# Used database in the app with justification on why to choose it.
-# Write unit testing for the API integration & business logic implementation.
+## Used database in the app with justification on why to choose it.
+## Write unit testing for the API integration & business logic implementation.
 
 
 # Apply dependency injection with inj the selected library.
