@@ -47,10 +47,10 @@ class DioRemoteDataSource extends CurrenciesApiHelper
       ZipStream<Response, List<CountryCurrencyModel>> streamResponse =
           ZipStream([
         Stream.fromFuture(
-          dio.get("api/v7/currencies?apiKey=797b37664a3d10ec32d3"),
+          dio.get("/api/v7/currencies?apiKey=797b37664a3d10ec32d3"),
         ),
         Stream.fromFuture(
-          dio.get("api/v7/countries?apiKey=797b37664a3d10ec32d3"),
+          dio.get("/api/v7/countries?apiKey=797b37664a3d10ec32d3"),
         ),
         Stream.fromFuture(
           dioFlag.get("https://flagcdn.com/en/codes.json"),
@@ -178,8 +178,7 @@ class DioRemoteDataSource extends CurrenciesApiHelper
 
         historicConverterModelList.add(response.data);
       }
-      historicConverterModelList
-          .map((e) => HistoricalModel.fromJson(e, e['USD_PHP']));
+
       return historicConverterModelList;
     } on DioError catch (e) {
       print("--------errors Countries ${e.error.toString()}");
@@ -192,7 +191,7 @@ class DioRemoteDataSource extends CurrenciesApiHelper
   // TODO:  SOLVING BY SAMPLE CASE //////////////
   // solving multi requests problem with Sample Case solution.
   // @override
-  // Future<ResponseCountryCurrencyEntity> fetchAllCountriesCurrencyFlags() async {
+  // Future<List<CountryCurrencyModel>> fetchAllCountriesCurrencyFlags() async {
   //   Dio dio = Dio();
   //   try {
   //     List<String> currencyIdList = [];
@@ -235,7 +234,7 @@ class DioRemoteDataSource extends CurrenciesApiHelper
   //           currencyName: i.currencyName,
   //           currencySymbol: i.currencySymbol));
   //     }
-  //     return ResponseCountryCurrency(countryCurrencyEntityList: items);
+  //     return items;
   //   } on DioError catch (e) {
   //     print("--------errors Countries ${e.error.toString()}");
   //     print("--------statuscode Countries ${e.response}");
@@ -243,11 +242,10 @@ class DioRemoteDataSource extends CurrenciesApiHelper
   //   }
   // }
 
-  //TODO: SOLVING BY FUTURE.WAIT
+  // TODO: SOLVING BY FUTURE.WAIT
   // solving multi requests problem with future.wait() solution.
   // @override
-  // Future<ResponseCountryCurrencyEntity>
-  //     fetchAllCountriesCurrencyFlags() async {
+  // Future<List<CountryCurrencyModel>> fetchAllCountriesCurrencyFlags() async {
   //   Dio dio = Dio();
   //   try {
   //     List<String> currencyIdList = [];
@@ -266,7 +264,7 @@ class DioRemoteDataSource extends CurrenciesApiHelper
   //     ResponseCountriesModel countryModel =
   //         ResponseCountriesModel.fromJson(multiResponse[1].data);
   //     ResponseCountryCodeModel codeCountry =
-  //         ResponseCountryCodeModel.fronJson(multiResponse[2].data);
+  //         ResponseCountryCodeModel.fromJson(multiResponse[2].data);
   //     for (var idCurrency in currencyModel.currencies.currencyMap) {
   //       currencyIdList.add(idCurrency.id);
   //     }
@@ -291,7 +289,7 @@ class DioRemoteDataSource extends CurrenciesApiHelper
   //           currencyName: i.currencyName,
   //           currencySymbol: i.currencySymbol));
   //     }
-  //     return ResponseCountryCurrency(countryCurrencyEntityList: items);
+  //     return items;
   //   } on DioError catch (e) {
   //     print("--------errors Countries ${e.error.toString()}");
   //     print("--------statuscode Countries ${e.response}");
@@ -299,22 +297,4 @@ class DioRemoteDataSource extends CurrenciesApiHelper
   //   }
   // }
 
-}
-
-class HistoricalModel {
-  final String firstCurrency;
-  final String secondCurrency;
-  final String date;
-
-  HistoricalModel(
-      {required this.firstCurrency,
-      required this.secondCurrency,
-      required this.date});
-
-  factory HistoricalModel.fromJson(
-          Map<String, dynamic> json, String dateTime) =>
-      HistoricalModel(
-          firstCurrency: json['USD_PHP'][dateTime],
-          secondCurrency: json['PHP_USD'][dateTime],
-          date: dateTime);
 }
