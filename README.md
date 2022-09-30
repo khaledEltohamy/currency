@@ -19,7 +19,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## List of supported currencies with their country’s flag , Store the data locally in a database.
 
- It contains a set of cards consisting of the names of the countries and their corresponding currency names and taught them using three API requests.
+ It contains a set of cards consisting of the names of the countries and their corresponding currency names and taught them using multi API requests.
  
  A few resources:
 - [Free API for the app]( https://free.currencyconverterapi.com/)
@@ -27,12 +27,14 @@ samples, guidance on mobile development, and a full API reference.
  
  Solving multi requests problem by three solutions:
   - the simple way, for call three api as default.
-  - use future.wait().
-  - use rxDart (ZipStream()).
+  - using future.wait().
+  - [future.wait() online resource](https://api.flutter.dev/flutter/dart-async/Future/wait.html)
+  - using rxDart (ZipStream()).
+  - [future.wait() online resource](https://pub.dev/documentation/rxdart/latest/rx/ZipStream-class.html)
  
  - Note: can un commit for three TODO in remoteDataSource.dart file and try it.
  
- - After the first API request & load the data from it for future usage:
+ After the first API request & load the data from it for future usage:
  can try it when lost connection from internet.
 
 ## Adapted image loader library with justification on why to choose it.
@@ -52,11 +54,23 @@ Reduce internet charges for your users if they use 3G/4G/5G.
 Fortunately, implementing image caching in Flutter is not an advanced task and we can get it done with a few dozen lines of code and the help of a great plugin named.
 
 For help getting started with cached_network_image, view the
-- [ cached_network_image online documentation](https://pub.dev/packages/cached_network_image)
+- [cached_network_image online documentation](https://pub.dev/packages/cached_network_image)
 
+## Adapted design pattern for the app architecture with justification on why to choose it.
+
+- Factory.
+- Singleton.
+- Repository.
+- Observable.
 
 ## Used database in the app with justification on why to choose it.
-## Write unit testing for the API integration & business logic implementation.
+
+SharedPreferences is on par with Hive when it comes to read performance. SQLite performs much worse.
+Hive greatly outperforms SQLite and SharedPreferences when it comes to writing or deleting.
+But in our solution there was no significant difference in performance, so we can use either of them.
+
+- [shared_preferences online documentation](https://pub.dev/packages/shared_preferences)
+- [hive online documentation](https://pub.dev/packages/hive)
 
 
 ## Apply dependency injection with inj the selected library.
