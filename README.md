@@ -18,7 +18,7 @@ For the list of supported currencies you can use the Cloudmersive API (https://a
 - [cloudmersive](https://api.cloudmersive.com/docs/currency.asp)
 - [Free countries flags icons](https://flagcdn.com/)
 
- # NOTE ::
+ ### NOTE ::
 
  Solving multi requests problem by three solutions:
   - the simple way, for call three api as default.
@@ -92,7 +92,7 @@ Support for multiple platforms: Hive is available on multiple platforms, includi
 ## unit testing for the API integration & business logic implementation.
 We can find all test files for each layer and all use cases.
 
-# NOTE : 
+### NOTE : 
 You can use Makefile to execute test commands .
 for example : make test_datasource .
 ## Apply dependency injection with inj the selected library.
