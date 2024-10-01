@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
-import '../constants/strings/app_strings.dart';
-
+// ignore: must_be_immutable
 abstract class ApiHelper extends Equatable {
   late Dio dio;
   late BaseOptions options;
+  
   ApiHelper() {
     options = BaseOptions(
       responseType: ResponseType.json,
@@ -13,14 +13,22 @@ abstract class ApiHelper extends Equatable {
         "Accept": "application/json",
         "Content-Type": "application/json",
       },
-      baseUrl: AppString.baseCurrenciesUrl,
     );
 
     dio = Dio(options);
+    
   }
-  @override
+  Future<Response> postData({
+    required String url,
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? query,
+    Map<String, dynamic>? headers,
+  });
+  Future<Response> getData({
+    required String url,
+    Map<String, dynamic>? query,
+    Map<String, dynamic>? headers,
+  });
+ @override
   List<Object?> get props => [];
 }
-
-// ignore: must_be_immutable
-class CurrenciesApiHelper extends ApiHelper {}

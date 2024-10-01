@@ -19,10 +19,10 @@ samples, guidance on mobile development, and a full API reference.
 
 ## List of supported currencies with their country’s flag , Store the data locally in a database.
 
- It contains a set of cards consisting of the names of the countries and their corresponding currency names and taught them using multi API requests.
- 
+For the list of supported currencies you can use the Cloudmersive API (https://api.cloudmersive.com/docs/currency.asp) to get a list of available currencies and corresponding countries. This API provides a list of currencies with their ISO codes, names, and country names and country flags (https://flagcdn.com/16x12/countryIsoCode.png).
+
  A few resources:
-- [Free API for the app]( https://free.currencyconverterapi.com/)
+- [Free API for the app](https://api.cloudmersive.com/docs/currency.asp)
 - [Free countries flags icons](https://flagcdn.com/)
  
  Solving multi requests problem by three solutions:

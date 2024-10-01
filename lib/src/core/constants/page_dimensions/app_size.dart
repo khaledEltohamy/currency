@@ -1,5 +1,7 @@
 class AppSize {
   static const double buttonHeight = 42;
+  static const double cardMinHeight = 70;
+  static const double cardMaxHeight = 120;
   static const double buttonRadius = 5;
   static const double infinity = double.infinity;
 

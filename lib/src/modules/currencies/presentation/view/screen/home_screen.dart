@@ -26,17 +26,18 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _converterSection() => Container(
-      margin: const EdgeInsets.only(top: 40, left: 10, right: 10),
-      child: Column(
+      margin: const EdgeInsets.only(top: 60, left: 16, right: 16),
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children:  [
           Text(
             "Converter two Currencies.",
             textAlign: TextAlign.start,
             style: TextStyle(fontWeight: FontWeight.w700),
           ),
+          SizedBox(height: 16),
           ConverterList(),
-        ],
+        ]
       ));
 
   Widget _historicalSection() => Container(

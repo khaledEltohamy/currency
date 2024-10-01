@@ -8,11 +8,10 @@ abstract class ConverterCurrenciesEvent extends Equatable {
 }
 
 class GetConverterCurrencies extends ConverterCurrenciesEvent {
-  final CountryCurrencyEntity firstCountryCurrencyEntity;
-  final CountryCurrencyEntity secondCountryCurrencyEntity;
+  final String from , to ;
+  final double amount ;
 
-  const GetConverterCurrencies({
-    required this.firstCountryCurrencyEntity,
-    required this.secondCountryCurrencyEntity,
-  });
+ const  GetConverterCurrencies({required this.from, required this.to, required this.amount});
+
+
 }

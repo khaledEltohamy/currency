@@ -1,23 +1,33 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import '../../errors/faliure.dart';
 
-class AppString {
-  //Keys
-  static const ApiKey = "797b37664a3d10ec32d3";
-  //URLs
-  static const baseCurrenciesUrl = 'https://free.currconv.com';
-  static const baseFlagUrl = "https://flagcdn.com";
+extension BaseUrl on String {
+  String get cloudmersive => "https://api.cloudmersive.com/currency/exchange-rates/list-available";
+  String get exchangeratesapi => "https://api.exchangeratesapi.io/";
+  String get currencylayer => "https://api.currencylayer.com/";
 
-  static const listCurrenciesUrl = "/api/v7/currencies?apiKey=$ApiKey";
-  static const listCountryUrl = "/api/v7/countries?apiKey=$ApiKey";
-  static const listHistoricalUrl =
-      "https://free.currconv.com/api/v7/convert?q=USD_PHP,PHP_USD&compact=ultra&date=2022-3-12&apiKey=${ApiKey}";
-  static const converterUrl =
-      "/api/v7/convert?q=USD_PHP,PHP_USD&compact=ultra&callback=sampleCallback&apiKey=${ApiKey}";
-  static const listCodeCountry = "/en/codes.json";
-  //Paths Queries
+}
+
+extension KeysUrl on String {
+   
+   get cloudmersiveKey => dotenv.env["cloudmersiveKey"];
+   get cloudmersiveKeyName => "Apikey";
+   
+   get exchangeratesapiKey => dotenv.env["exchangeratesapiKey"];
+   get exchangeratesapiKeyName => "access_key";
+   
+   get currencylayerKey => dotenv.env["currencylayerKey"];
+   get currencylayerKeyName => "access_key";
+}
+class AppString {
+
+  static const key = "KEY";
+  static const url = "URL";
 
   //Local Storage Keys
-  static const cachedCountryCurrencyKey = "cachedCountryCurrencyKey";
+  static const cachedCurrencyBoxKey = "cachedCurrencyBoxKey";
+  static const cachedCurrencyKey = "cachedCurrencyKey";
   //Errors
   static const dioError = 'Dio Error.';
   static const exception = 'Exception.';
@@ -26,11 +36,13 @@ class AppString {
   static const emptyCached = 'Empty cached data.';
   static const defaultError = 'Something went wrong, Please try agin later.';
 
-//Success
-  static const String successesAddItem = "Successes add Item.";
-  static const String successesRemoveItem = "Successes Remove Item.";
+//Keys
+  static const String amountFormKey = "amountFormKey";
+   static const String buttonFormKey = "buttonFormKey";
+  static const String amountValueNotRequired = "If amout value is 0 or empty , will take 1 automaticly";
 
-  static dynamic handlingFiledMassageCase(Failure failure) {
+
+  static String handlingFiledMassageCase(Failure failure) {
     if (failure is FailureService) {
       return defaultError;
     }
@@ -39,6 +51,8 @@ class AppString {
     }
     if (failure is FailureEmptyCache) {
       return emptyCached;
+    }else {
+      return defaultError;
     }
   }
 }

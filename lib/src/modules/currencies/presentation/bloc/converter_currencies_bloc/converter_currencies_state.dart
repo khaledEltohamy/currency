@@ -3,18 +3,31 @@ part of 'converter_currencies_bloc.dart';
 abstract class ConverterCurrenciesState extends Equatable {
   const ConverterCurrenciesState();
 
-  @override
+
+}
+
+class ConverterCurrenciesInitial extends ConverterCurrenciesState {
+    @override
   List<Object> get props => [];
 }
 
-class ConverterCurrenciesInitial extends ConverterCurrenciesState {}
+class CurrenciesConverterField extends ConverterCurrenciesState {
+ final  String? error;
 
-class CurrenciesConverterField extends ConverterCurrenciesState {}
-
-class CurrenciesConverterSuccess extends ConverterCurrenciesState {
-  final ConverterModel converterModel;
-
-  const CurrenciesConverterSuccess(this.converterModel);
+const CurrenciesConverterField({ this.error});
+    @override
+  List<Object> get props => [error ?? ""];
 }
 
-class CurrenciesConverterLoading extends ConverterCurrenciesState {}
+class CurrenciesConverterSuccess extends ConverterCurrenciesState {
+  final CurrencyConverterModel converterModel;
+
+  const CurrenciesConverterSuccess(this.converterModel);
+    @override
+  List<Object> get props => [converterModel];
+}
+
+class CurrenciesConverterLoading extends ConverterCurrenciesState {
+  @override
+  List<Object> get props => [];
+}

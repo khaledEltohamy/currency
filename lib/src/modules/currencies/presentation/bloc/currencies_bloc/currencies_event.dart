@@ -9,4 +9,4 @@ abstract class CurrenciesEvent extends Equatable {
 
 class GetCurrenciesEvent extends CurrenciesEvent {}
 
-class GetCurrenciesWithFlagsEvent extends CurrenciesEvent {}
+class GetSupportedCurrenciesEvent extends CurrenciesEvent {}

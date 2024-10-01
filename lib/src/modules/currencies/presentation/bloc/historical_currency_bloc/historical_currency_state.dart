@@ -10,11 +10,20 @@ abstract class HistoricalCurrencyState extends Equatable {
 class HistoricalCurrencyInitial extends HistoricalCurrencyState {}
 
 class HistoricalCurrencySuccess extends HistoricalCurrencyState {
-  final List<Map<String, dynamic>> historicalList;
+  final List<HistoricalCurrenciesModel> historicalList;
 
   const HistoricalCurrencySuccess(this.historicalList);
 }
 
 class HistoricalCurrencyLoading extends HistoricalCurrencyState {}
 
-class HistoricalCurrencyField extends HistoricalCurrencyState {}
+class HistoricalCurrencyField extends HistoricalCurrencyState {
+     final String? error;
+
+  const HistoricalCurrencyField({this.error});
+}
+class HistoricalCurrencyOffline extends HistoricalCurrencyState {
+    final String? error;
+
+  const HistoricalCurrencyOffline({this.error});
+}

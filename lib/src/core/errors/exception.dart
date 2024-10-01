@@ -1,4 +1,8 @@
-class ExceptionService implements Exception {}
+class ExceptionService implements Exception {
+  final String? error;
+
+  ExceptionService({this.error});
+}
 
 class ExceptionOffline implements Exception {}
 

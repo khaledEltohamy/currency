@@ -7,16 +7,24 @@ abstract class CurrenciesState extends Equatable {
   List<Object> get props => [];
 }
 
-class CurrenciesInitial extends CurrenciesState {}
+class SupportedCurrenciesInitial extends CurrenciesState {}
 
-class CurrenciesWithFlagsLoading extends CurrenciesState {}
+class SupportedCurrenciesLoading extends CurrenciesState {}
 
-class CurrenciesWithFlagsSuccess extends CurrenciesState {
-  final List<CountryCurrencyModel> responseCountryCurrencyEntity;
+class SupportedCurrenciesSuccess extends CurrenciesState {
+  final List<SupportedCurrenciesModel> supportedCurrencies;
 
-  const CurrenciesWithFlagsSuccess(this.responseCountryCurrencyEntity);
+  const SupportedCurrenciesSuccess(this.supportedCurrencies);
 }
 
-class CurrenciesWithFlagsField extends CurrenciesState {}
+class SupportedCurrenciesFialure extends CurrenciesState {
+  final String? error;
 
-class CurrenciesWithFlagsOffline extends CurrenciesState {}
+  const SupportedCurrenciesFialure({required this.error});
+}
+
+class SupportedCurrenciesOffline extends CurrenciesState {
+    final String? error;
+
+  const SupportedCurrenciesOffline({this.error});
+}

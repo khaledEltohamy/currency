@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/widget/loading/loading_circular.dart';
+import '../../../domain/model/historical_currencies_model.dart';
 import '../../bloc/historical_currency_bloc/historical_currency_bloc.dart';
 
 class HistoricalList extends StatelessWidget {
@@ -11,12 +13,13 @@ class HistoricalList extends StatelessWidget {
     return BlocBuilder<HistoricalCurrencyBloc, HistoricalCurrencyState>(
       builder: (context, state) {
         if (state is HistoricalCurrencyLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const LoadingCircularWidget();
         }
         if (state is HistoricalCurrencyField) {
-          return const Center(child: Text("Something wrong"));
+          return  Center(child: Text("${state.error}"));
+        }
+          if (state is HistoricalCurrencyOffline) {
+          return  Center(child: Text("${state.error}"));
         }
         if (state is HistoricalCurrencySuccess) {
           return _historicalSectionSuccess(state.historicalList);
@@ -27,41 +30,48 @@ class HistoricalList extends StatelessWidget {
     );
   }
 
-  Widget _historicalSectionSuccess(List<Map<String, dynamic>> historicalList) =>
+  Widget _historicalSectionSuccess(List<HistoricalCurrenciesModel> historicalList) =>
       SizedBox(
-        height: 90,
+        height: 150,
         child: ListView.builder(
             padding: EdgeInsets.zero,
             scrollDirection: Axis.horizontal,
             itemCount: historicalList.length,
             itemBuilder: (context, index) => Card(
                   child: Container(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            "PHP_USD: ${historicalList[index].values.toString().substring(13, 22)}",
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                            "BASE : ${historicalList[index].base}",
+                            style:const  TextStyle(fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(
+                           const  SizedBox(
                             height: 8,
                           ),
                           Text(
-                            "USD_PHP: ${historicalList[index].values.toString().substring(38, 46)}",
+                            "${historicalList[index].ratesModel[0].currency} :${historicalList[index].ratesModel[0].value}",
+                            style:const  TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                         const  SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            "${historicalList[index].ratesModel[1].currency} :${historicalList[index].ratesModel[1].value}",
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                color: Colors.grey),
+                               ),
                           ),
                           Spacer(),
                           Text(
-                            "Date: ${historicalList[index].values.toString().substring(2, 12)}",
+                            "Date: ${historicalList[index].date}",
                             style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.grey),
+                               ),
                           ),
                         ],
                       ),

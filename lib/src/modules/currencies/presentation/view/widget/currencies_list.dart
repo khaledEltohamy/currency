@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/entites/country_currency_entity.dart';
+import '../../../domain/model/supported_currencies_model.dart';
 import '../../bloc/currencies_bloc/currencies_bloc.dart';
-import 'currency_card.dart';
+import '../../../../../core/widget/cards/currency_card.dart';
 
 class CurrenciesList extends StatelessWidget {
   const CurrenciesList({super.key});
@@ -14,24 +12,22 @@ class CurrenciesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CurrenciesBloc, CurrenciesState>(
         builder: (context, state) {
-      if (state is CurrenciesWithFlagsLoading) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
+      if (state is  SupportedCurrenciesLoading) {
+        return const Center(child: CircularProgressIndicator());
       }
-      if (state is CurrenciesWithFlagsSuccess) {
-        List<CountryCurrencyEntity> listItems =
-            state.responseCountryCurrencyEntity;
+      if (state is  SupportedCurrenciesSuccess) {
+        List<SupportedCurrenciesModel> listItems =
+            state.supportedCurrencies;
         return _currenciesWithFlagsSuccess(listItems);
       }
-      if (state is CurrenciesWithFlagsField) {
-        return const Center(
-          child: Text("Something wrong with server please try agin later"),
+      if (state is  SupportedCurrenciesFialure) {
+        return  Center(
+          child: Text("${state.error}"),
         );
       }
-      if (state is CurrenciesWithFlagsOffline) {
-        return const Center(
-          child: Text("You are offline , Please check connection and try agin"),
+      if (state is  SupportedCurrenciesOffline) {
+        return  Center(
+          child: Text("${state.error}"),
         );
       } else {
         return const Center(
@@ -41,14 +37,14 @@ class CurrenciesList extends StatelessWidget {
     });
   }
 
-  Widget _currenciesWithFlagsSuccess(List<CountryCurrencyEntity> listItems) =>
+  Widget _currenciesWithFlagsSuccess(List<SupportedCurrenciesModel> listItems) =>
       ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         itemCount: listItems.length,
         itemBuilder: (context, index) => CurrencyCard(
-          countryCurrencyEntity: listItems[index],
+          model: listItems[index],
           isadded: true,
         ),
       );
